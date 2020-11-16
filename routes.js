@@ -7,6 +7,7 @@ const ctrlUser = require('./controllers/users');
 const ctrlAdmin = require('./controllers/admin');
 const ctrlFile = require('./file');
 const ctrlCamera = require('./controllers/camera');
+const ctrlSetting = require('./controllers/setting');
 
 const router = require('express').Router();
 //user
@@ -60,11 +61,11 @@ router.post('/company/getCameraUserIndividual',[requireAuth,requireAdmin],ctrlCa
 router.post('/company/editCameraUserIndividual',[requireAuth,requireAdmin],ctrlCamera.editCameraUserIndividual);
 router.post('/company/delCameraUserIndividual',[requireAuth,requireAdmin],ctrlCamera.delCameraUserIndividual);
 router.post('/company/addCameraUserIndividual',[requireAuth,requireAdmin],ctrlCamera.addCameraUserIndividual);
+//landing page
+router.post('/admin/updateSetting',[requireAuth,requireSuper],ctrlSetting.updateSetting);
+router.post('/admin/getSetting',[requireAuth,requireSuper],ctrlSetting.getSetting);
+router.post('/admin/settingUpload',[requireAuth,requireSuper],ctrlFile.uploadSetting);
 
-router.post('/company/getCameraUserCompany',[requireAuth,requireAdmin],ctrlCamera.getCameraUserCompany);
-router.post('/company/editCameraUserCompany',[requireAuth,requireAdmin],ctrlCamera.editCameraUserCompany);
-router.post('/company/delCameraUserCompany',[requireAuth,requireSystem],ctrlCamera.delCameraUserCompany);
-router.post('/company/addCameraUserCompany',[requireAuth,requireAdmin],ctrlCamera.addCameraUserCompany);
 module.exports = (app) => {
   app.use('/api', router);
 
